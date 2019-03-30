@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", event => {
 
 async function GoogleLogin() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  result = await firebase.auth().signInWithPopup(provider);
-  console.log(result);
+  const result = await firebase.auth().signInWithPopup(provider);
+  const user = result.user;
+  document.querySelector("#userIntro").innerHTML =
+    "Welcome, " + user.displayName;
 }
