@@ -17,20 +17,19 @@
     <script defer src="/__/firebase/5.9.2/firebase-database.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-messaging.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-storage.js"></script>
-    <script defer src="/__/firebase/5.9.2/firebase-firestore.js"></script>
-
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
   </head>
   <body>
     <div class="jumbotron">
-      <h1>This is the origin of the Social App Thing</h1>
+      <h1>Decentralized Food</h1>
       <button onclick="GoogleLogin()" class="btn btn-warning btn-lg text-white">
         Login with Google
       </button>
       <hr />
       <p id="userIntro">Welcome</p>
     </div>
+    <input type="file" onchange="uploadFile(this.files)">
     <script src="app.js"></script>
   </body>
 </html>
