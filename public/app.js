@@ -9,8 +9,11 @@ document.addEventListener("DOMContentLoaded", event => {
     }
   })
 });
+
 var documents = [];
+var otherDocuments = [];
 var myGoals = [];
+var otherGoals = [];
 var user = ""
 var currQuery="";
 
@@ -25,12 +28,23 @@ async function GoogleLogin() {
   storeMyGoals();
 }
 
-function storeOthersGoals(){
+async function storeOthersGoals(){
+  otherDocuments = [];
+  otherGoals = [];
   var query = firebase.firestore().collection('goals').where('owner', '!=', window.localStorage.getItem('userName'));
-  goals = await 
+  goals = await query.get();
+  goals.forEach(goal => {
+otherDocuments.push({'name': goal.data().name, 'description': goal.data().description, 'id': goal.id});
+otherGoals.push(goal.data().name);
+  })
+
+  window.localStorage.setItem('otherDocuments', JSON.stringify(otherDocuments));
+  window.localStorage.setItem('otherGoals', JSON.stringify(otherGoals));
 }
 
 function storeMyGoals() {
+  documents = [];
+  myGoals= [];
   var query = firebase.firestore()
   .collection('goals')
   .where('owner', '==', window.localStorage.getItem('userName'))
@@ -189,7 +203,8 @@ async function signIn() {
   document.querySelector("#login").innerHTML = "Log out";
   document.querySelector("#profile-pic").src = getProfilePicUrl();
   addMyTable();
-
+  storeMyGoals();
+  storeOthersGoals();
 }
 
 function signOut() {
