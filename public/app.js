@@ -44,3 +44,5 @@ async function getGoals(name) {
     " Status: " +
     data.status;
 }
+
+function updateGoal
