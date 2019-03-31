@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", event => {
   const app = firebase.app();
-  getGoals("jpKiOJ9QYxblUvHM3G2Y");
 });
 var user = ""
 async function GoogleLogin() {
@@ -9,6 +8,7 @@ async function GoogleLogin() {
   user = result.user;
   document.querySelector("#userIntro").innerHTML =
     "Welcome, " + user.displayName;
+  addUser(user);
 }
 
 function uploadFile(files) {
@@ -47,12 +47,28 @@ function addGoal() {
     description: document.querySelector("#description").value,
     start: firebase.firestore.Timestamp.fromDate(new Date(document.querySelector("#start").value)),
     end: firebase.firestore.Timestamp.fromDate(new Date(document.querySelector("#end").value)),
-    owner: user.displayName
+    owner: user.displayName,
+    followers: 0,
+    media: []
   })
   .then(function(docRef) {
     console.log("Document written with ID: ", docRef.id);
   })
   .catch(function(error) {
     console.error("Error adding document: ", error);
+  });
+}
+
+function addUser(user) {
+  const db = firebase.firestore();
+  db.collection("users").doc(user.displayName).set({
+    name: user.displayName,
+    karma: 0,
+  }, {merge: true})
+  .then(function() {
+    console.log("Document successfully written!");
+  })
+  .catch(function(error) {
+    console.error("Error writing document: ", error);
   });
 }
