@@ -3,71 +3,106 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LAHacks Test</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-      crossorigin="anonymous"
-    />
+    <title>Profile</title>
+
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/5.9.2/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/5.9.2/firebase-auth.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-database.js"></script>
-    <script defer src="/__/firebase/5.9.2/firebase-firestore.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-messaging.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-storage.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-firestore.js"></script>
 
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-          $('#goal').attr("disabled", true);
-      });
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Comfortaa"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
   </head>
-  <body>
-    <div class="jumbotron">
-      <h1>Decentralized Food</h1>
-      <button onclick="GoogleLogin()" class="btn btn-warning btn-lg text-white">
-        Login with Google
+  <body class="green-gradient">
+    <nav class="navbar navbar-inverse current-font shadow" style="height: 9vh;">
+      <a class="navbar-brand text-white log-in-button" href="goals.html">SwoleGoals</a>
+      <button id="login" onclick="toggleSignIn()" class="log-in-button">
+        Log in
       </button>
-      <hr />
-      <p id="userIntro">Welcome</p>
+    </nav>
+    <br />
+    <br />
+    <br />
+    <div class="text-center" style="height: 10vh">
+      <a
+        class="current-font large-style text-white"
+        style="background: var(--green-color);"
+      >
+        Welcome
+      </a>
     </div>
     <div class="text-center">
-      <h1 class="display-4 text-warning">Present Goals</h1>
-      <div class="jumbotron" style="margin: 5em"></div>
+      <img
+        src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+        id="profile-pic"
+        height="200px"
+        width="200px"
+        class="large-style"
+        style="padding: 10px"
+      />
+      <br />
+      <a
+        class="secondary-large-style"
+        style="color: var(--green-color)"
+        id="username"
+      ></a>
+      <a class="secondary-large-style" style="color: var(--green-color)"
+        >69 <i class="fas fa-coins"></i>
+      </a>
+      <div class="goal-table current-font" style="transform: translateY(-30)" id="mytable-container">
+        <!-- <table
+          class="table table-hover"
+          style="color: var(--green-color); border: solid var(--green-color) 4px"
+        >
+          <thead>
+            <tr>
+              <th scope="col">< Goal ></th>
+              <th scope="col">< Supporters ></th>
+              <th scope="col">< More Info ></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Goal 1</td>
+              <td>5 <i class="fas fa-coins"></i></td>
+              <td><button class="goal-button">+</button></td>
+            </tr>
+            <tr>
+              <td>Goal 2</td>
+              <td>10 <i class="fas fa-coins"></i></td>
+              <td><button class="goal-button">+</button></td>
+            </tr>
+            <tr>
+              <td>Goal 3</td>
+              <td>300 <i class="fas fa-coins"></i></td>
+              <td><button class="goal-button">+</button></td>
+            </tr>
+          </tbody>
+        </table> -->
+      </div>
+      <a class="goal-button" href="edit.html">Add a new Goal</a>
     </div>
-    <input type="file" onchange="uploadFile(this.files)" />
     <script src="app.js"></script>
-    <br>
-    <br>
-
-    <form name="goal">
-      <h5>Add Goal</h5>
-      <p>
-        <span>Name:</span>
-        <input type="text" id="name" onKeyup="checkForm()" required>
-      </p>
-      <p>
-        <span>Description:</span>
-        <input type="text" id="description" onKeyup="checkForm()" required>
-      </p>
-      <p>
-        <span>Start:</span>
-        <input type="date" id="start" onchange="checkForm()" required>
-      </p>
-      <p>
-        <span>End:</span>
-        <input type="date" id="end" onchange="checkForm()" required>
-      </p>
-      <p>
-        <input type="button" id="goal" value="Update" onclick="addGoal()"/>
-      </p>
-    </form>
   </body>
 </html>
