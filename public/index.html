@@ -17,6 +17,8 @@
     <script defer src="/__/firebase/5.9.2/firebase-database.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-messaging.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-storage.js"></script>
+    <script defer src="/__/firebase/5.9.2/firebase-firestore.js"></script>
+
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
   </head>
@@ -29,7 +31,11 @@
       <hr />
       <p id="userIntro">Welcome</p>
     </div>
-    <input type="file" onchange="uploadFile(this.files)">
+    <div class="text-center">
+      <h1 class="display-4 text-warning">Present Goals</h1>
+      <div class="jumbotron" style="margin: 5em" id="goal-holder"></div>
+    </div>
+    <input type="file" onchange="uploadFile(this.files)" />
     <script src="app.js"></script>
   </body>
 </html>
