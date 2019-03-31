@@ -15,12 +15,19 @@
     <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/5.9.2/firebase-auth.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.9.2/firebase-firestore.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-messaging.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-storage.js"></script>
     <script defer src="/__/firebase/5.9.2/firebase-firestore.js"></script>
 
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('#goal').attr("disabled", true);
+      });
+    </script>
   </head>
   <body>
     <div class="jumbotron">
@@ -37,5 +44,30 @@
     </div>
     <input type="file" onchange="uploadFile(this.files)" />
     <script src="app.js"></script>
+    <br>
+    <br>
+
+    <form name="goal">
+      <h5>Add Goal</h5>
+      <p>
+        <span>Name:</span>
+        <input type="text" id="name" onKeyup="checkForm()" required>
+      </p>
+      <p>
+        <span>Description:</span>
+        <input type="text" id="description" onKeyup="checkForm()" required>
+      </p>
+      <p>
+        <span>Start:</span>
+        <input type="date" id="start" onchange="checkForm()" required>
+      </p>
+      <p>
+        <span>End:</span>
+        <input type="date" id="end" onchange="checkForm()" required>
+      </p>
+      <p>
+        <input type="button" id="goal" value="Update" onclick="addGoal()"/>
+      </p>
+    </form>
   </body>
 </html>

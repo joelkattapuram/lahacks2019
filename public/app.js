@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", event => {
   const app = firebase.app();
   getGoals("jpKiOJ9QYxblUvHM3G2Y");
 });
-
+var user = ""
 async function GoogleLogin() {
   const provider = new firebase.auth.GoogleAuthProvider();
   const result = await firebase.auth().signInWithPopup(provider);
-  const user = result.user;
+  user = result.user;
   document.querySelector("#userIntro").innerHTML =
     "Welcome, " + user.displayName;
 }
@@ -30,18 +30,29 @@ function uploadFile(files) {
   });
 }
 
-async function getGoals(name) {
-  const goals = firebase.firestore().collection("goals");
-  const post = goals.doc(name);
-  post.onSnapshot(doc => {
-    const data = doc.data();
-    console.log(data);
-    document.querySelector("#goal-holder").innerHTML =
-      "Name: " +
-      data.name +
-      " End-Date: (we need to convert this mofo)" +
-      data.end.seconds +
-      " Status: " +
-      data.status;
+function checkForm() {
+  var f = document.forms["goal"].elements;
+  var cansubmit = true;
+  for (var i = 0; i < f.length; i++) {
+    if (f[i].value.length == 0) cansubmit = false;
+  }
+  document.getElementById('goal').disabled = !cansubmit;
+}
+
+function addGoal() {
+  const db = firebase.firestore();
+  const goals = db.collection("goals");
+  goals.add({
+    name: document.querySelector("#name").value,
+    description: document.querySelector("#description").value,
+    start: firebase.firestore.Timestamp.fromDate(new Date(document.querySelector("#start").value)),
+    end: firebase.firestore.Timestamp.fromDate(new Date(document.querySelector("#end").value)),
+    owner: user.displayName
+  })
+  .then(function(docRef) {
+    console.log("Document written with ID: ", docRef.id);
+  })
+  .catch(function(error) {
+    console.error("Error adding document: ", error);
   });
 }
