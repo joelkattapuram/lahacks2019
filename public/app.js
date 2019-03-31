@@ -29,3 +29,5 @@ function uploadFile(files) {
 
   })
 }
+
+function updateGoal
