@@ -33,16 +33,15 @@ function uploadFile(files) {
 async function getGoals(name) {
   const goals = firebase.firestore().collection("goals");
   const post = goals.doc(name);
-  const doc = await post.get();
-  const data = doc.data();
-  console.log(data);
-  document.querySelector("#goal-holder").innerHTML =
-    "Name: " +
-    data.name +
-    " End-Date: (we need to convert this mofo)" +
-    data.end.seconds +
-    " Status: " +
-    data.status;
+  post.onSnapshot(doc => {
+    const data = doc.data();
+    console.log(data);
+    document.querySelector("#goal-holder").innerHTML =
+      "Name: " +
+      data.name +
+      " End-Date: (we need to convert this mofo)" +
+      data.end.seconds +
+      " Status: " +
+      data.status;
+  });
 }
-
-function updateGoal
